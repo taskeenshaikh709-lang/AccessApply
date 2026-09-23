@@ -1,24 +1,177 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  Compass,
+  BookOpenText,
+  Keyboard,
+  ClipboardCheck,
+  ShieldCheck,
+  Type,
+  Contrast,
+  Mic,
+} from "lucide-react";
+import { ButtonLink, Card, DemoBadge, Pill, SectionHeading } from "@/components/ui-kit";
+import { useA11y } from "@/lib/a11y";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "AccessApply — Accessible Job Applications for Everyone" },
+      {
+        name: "description",
+        content:
+          "Find opportunities, understand requirements, and complete applications with accessibility support built into every step.",
+      },
+      { property: "og:title", content: "AccessApply — Accessible Job Applications for Everyone" },
+      {
+        property: "og:description",
+        content:
+          "An accessibility-first layer for the whole job application journey: find, understand, apply, review and confirm.",
+      },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const journey = [
+  { n: "01", title: "Discover", text: "Find suitable jobs.", icon: Compass },
+  { n: "02", title: "Understand", text: "Get job requirements explained clearly.", icon: BookOpenText },
+  { n: "03", title: "Apply", text: "Complete the application with accessibility support.", icon: Keyboard },
+  { n: "04", title: "Review", text: "Check your answers before submitting.", icon: ClipboardCheck },
+  { n: "05", title: "Confirm", text: "You stay in control of the final submission.", icon: ShieldCheck },
+];
+
+function Home() {
+  const { setPanelOpen } = useA11y();
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="space-y-24">
+      <section aria-labelledby="hero-title" className="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <DemoBadge />
+          <h1 id="hero-title" className="mt-5 text-4xl font-semibold leading-tight sm:text-5xl">
+            Accessible Job Applications for Everyone.
+          </h1>
+          <p className="mt-5 text-lg text-muted-foreground">
+            Find opportunities, understand requirements, and complete applications with
+            accessibility support built into every step.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink to="/jobs">Find Accessible Jobs</ButtonLink>
+            <ButtonLink to="/how-it-works" variant="secondary">
+              How It Works
+            </ButtonLink>
+          </div>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Find. Understand. Apply. Review. Confirm.
+          </p>
+        </div>
+
+        <Card aria-label="Preview of the accessible application interface" className="space-y-5">
+          <div className="flex items-center justify-between gap-4">
+            <p className="font-display text-lg font-semibold">Data Analyst — InsightWorks</p>
+            <Pill tone="blue">Step 3 of 5</Pill>
+          </div>
+          <div
+            className="h-2 w-full overflow-hidden rounded-full bg-muted"
+            role="img"
+            aria-label="Application progress: step 3 of 5"
+          >
+            <div className="h-full w-3/5 rounded-full bg-primary" />
+          </div>
+          <div className="rounded-xl border border-border bg-muted/60 p-4">
+            <p className="text-sm font-semibold">Which of these skills have you used?</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Select all that apply. Coursework and personal projects count.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Pill>SQL</Pill>
+              <Pill>Python</Pill>
+              <Pill tone="muted">JavaScript</Pill>
+            </div>
+          </div>
+          <ul className="grid gap-2 sm:grid-cols-3">
+            {[
+              { icon: Type, label: "Text size" },
+              { icon: Contrast, label: "High contrast" },
+              { icon: Mic, label: "Optional voice" },
+            ].map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="flex items-center gap-2 rounded-xl border border-border bg-softblue px-3 py-2 text-sm text-accent-foreground"
+              >
+                <Icon aria-hidden="true" className="size-4" /> {label}
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            onClick={() => setPanelOpen(true)}
+            className="min-h-11 w-full rounded-xl border border-input px-4 py-2 text-sm font-medium hover:bg-muted"
+          >
+            Open Accessibility Settings
+          </button>
+        </Card>
+      </section>
+
+      <section aria-labelledby="journey-title">
+        <SectionHeading
+          id="journey-title"
+          eyebrow="The journey"
+          title="One Journey. Fewer Barriers."
+          description="Every stage of applying for a job, with support built into the step itself rather than bolted on afterwards."
+        />
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {journey.map(({ n, title, text, icon: Icon }) => (
+            <li key={n}>
+              <Card className="h-full">
+                <Icon aria-hidden="true" className="size-6 text-primary" />
+                <p className="mt-4 text-sm font-semibold text-primary">{n}</p>
+                <h3 className="mt-1 text-lg font-semibold">{title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{text}</p>
+              </Card>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="usp-title">
+        <SectionHeading
+          id="usp-title"
+          eyebrow="Why it is different"
+          title="More Than Accessibility. A Complete Application Journey."
+        />
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {[
+            {
+              title: "Understand",
+              text: "Simplify job descriptions and clearly separate required skills from preferred ones.",
+            },
+            {
+              title: "Navigate",
+              text: "Support keyboard, screen reader, visual adjustments and optional voice interaction.",
+            },
+            {
+              title: "Complete",
+              text: "Guide people through forms, errors, review and confirmation without taking over.",
+            },
+          ].map((c) => (
+            <Card key={c.title}>
+              <h3 className="text-xl font-semibold">{c.title}</h3>
+              <p className="mt-2 text-muted-foreground">{c.text}</p>
+            </Card>
+          ))}
+        </div>
+        <Card className="mt-6 bg-lavender">
+          <ul className="space-y-1 text-lg font-medium">
+            <li>Not another job portal.</li>
+            <li>Not another screen reader.</li>
+            <li>Not just another chatbot.</li>
+          </ul>
+          <p className="mt-4 text-xl font-semibold text-primary">
+            An accessibility-first layer for the job application journey.
+          </p>
+        </Card>
+      </section>
     </div>
   );
 }
