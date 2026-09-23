@@ -193,7 +193,7 @@ function JobsPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[18rem_1fr]">
-        <Card as="div" className="h-fit space-y-4">
+        <Card className="h-fit space-y-4">
           <h2 className="text-lg font-semibold">Filters</h2>
           <div>
             <label htmlFor="job-search" className="block text-sm font-semibold">
