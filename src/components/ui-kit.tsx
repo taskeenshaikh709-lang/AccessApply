@@ -26,9 +26,22 @@ export function Button({
 export function ButtonLink({
   variant = "primary",
   className,
+  to,
+  params,
   ...props
-}: ComponentProps<typeof Link> & { variant?: Variant }) {
-  return <Link className={cn(base, variants[variant], className)} {...props} />;
+}: Omit<ComponentProps<typeof Link>, "to" | "params"> & {
+  variant?: Variant;
+  to: string;
+  params?: Record<string, string>;
+}) {
+  return (
+    <Link
+      to={to}
+      params={params}
+      className={cn(base, variants[variant], className)}
+      {...props}
+    />
+  );
 }
 
 export function Card({ className, ...props }: ComponentProps<"div">) {

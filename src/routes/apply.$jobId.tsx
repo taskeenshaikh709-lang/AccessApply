@@ -69,7 +69,7 @@ function Field({
   label: string;
   description: string;
   required?: boolean;
-  error?: { message: string; fix: string };
+  error?: { message: string; fix: string } | undefined;
   children: (props: { id: string; describedBy: string; invalid: boolean }) => React.ReactNode;
   onExplain: (message: string) => void;
 }) {
