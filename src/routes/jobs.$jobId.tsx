@@ -160,7 +160,7 @@ function JobDetails() {
 
           {explained ? (
             <Card
-              ref={explainRef as never}
+              ref={explainRef}
               tabIndex={-1}
               className="border-primary bg-lavender"
               aria-labelledby="explain-title"
