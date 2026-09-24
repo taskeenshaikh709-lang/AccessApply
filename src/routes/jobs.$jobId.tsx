@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { Volume2, Sparkles, Square, CheckCircle2, Star } from "lucide-react";
+import { Volume2, Sparkles, Square, CheckCircle2, Star, Bookmark, BookmarkCheck } from "lucide-react";
 import { getJob } from "@/data/jobs";
+import { getSavedJobs, toggleSavedJob } from "@/lib/applications";
 import { Button, ButtonLink, Card, DemoBadge, Pill } from "@/components/ui-kit";
 import { speak, stopSpeaking, useA11y } from "@/lib/a11y";
 import { useVoiceCommands } from "@/lib/voice";
