@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { Volume2, Sparkles, Square, CheckCircle2, Star, Bookmark, BookmarkCheck } from "lucide-react";
 import { getJob } from "@/data/jobs";
@@ -40,7 +40,16 @@ function JobDetails() {
   const [explained, setExplained] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [speechError, setSpeechError] = useState("");
+  const [saved, setSaved] = useState(false);
   const explainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => setSaved(getSavedJobs().includes(job.id)), [job.id]);
+
+  const toggleSave = () => {
+    const nowSaved = toggleSavedJob(job.id);
+    setSaved(nowSaved);
+    announce(nowSaved ? "Job saved. Find it on your dashboard." : "Job removed from saved jobs.");
+  };
 
   const readAloudText = [
     `${job.title} at ${job.company}.`,
@@ -120,6 +129,14 @@ function JobDetails() {
           <ButtonLink to="/apply/$jobId" params={{ jobId: job.id }} variant="outline">
             Start Accessible Application
           </ButtonLink>
+          <Button variant="ghost" onClick={toggleSave} aria-pressed={saved}>
+            {saved ? (
+              <BookmarkCheck aria-hidden="true" className="size-4" />
+            ) : (
+              <Bookmark aria-hidden="true" className="size-4" />
+            )}
+            {saved ? "Saved" : "Save job"}
+          </Button>
         </div>
         {speechError ? (
           <p role="status" className="text-sm text-muted-foreground">
