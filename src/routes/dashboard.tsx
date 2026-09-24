@@ -126,6 +126,84 @@ function Dashboard() {
           })}
         </ul>
       )}
+
+      <section aria-labelledby="saved-title" className="space-y-4">
+        <h2 id="saved-title" className="text-2xl font-semibold">
+          Saved Jobs
+        </h2>
+        {savedJobs.length === 0 ? (
+          <Card>
+            <p className="font-medium">No saved jobs yet.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Save jobs here to easily return to them later. Use the Save job button on any job
+              page.
+            </p>
+            <ButtonLink to="/jobs" variant="outline" className="mt-4">
+              Browse demo jobs
+            </ButtonLink>
+          </Card>
+        ) : (
+          <ul className="grid gap-4 md:grid-cols-2">
+            {savedJobs.map((job) => (
+              <li key={job.id}>
+                <Card className="flex h-full flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      <Link
+                        to="/jobs/$jobId"
+                        params={{ jobId: job.id }}
+                        className="rounded hover:underline"
+                      >
+                        {job.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {job.company} · {job.location}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Link
+                      to="/apply/$jobId"
+                      params={{ jobId: job.id }}
+                      className="inline-flex min-h-11 items-center rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                    >
+                      Apply<span className="sr-only"> to {job.title}</span>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => removeSaved(job.id)}
+                      className="inline-flex min-h-11 items-center rounded-xl border border-input px-4 py-2 text-sm font-medium hover:bg-muted"
+                    >
+                      Remove<span className="sr-only"> {job.title} from saved jobs</span>
+                    </button>
+                  </div>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section aria-labelledby="prefs-title" className="space-y-4">
+        <h2 id="prefs-title" className="text-2xl font-semibold">
+          Accessibility Preferences
+        </h2>
+        <Card>
+          <dl className="grid gap-3 sm:grid-cols-2">
+            {prefRows.map(([k, v]) => (
+              <div key={k} className="flex items-center justify-between gap-3 rounded-xl bg-muted/60 px-4 py-3">
+                <dt className="text-sm font-semibold">{k}</dt>
+                <dd>
+                  <Pill tone={v === "Off" ? "muted" : "blue"}>{v}</Pill>
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <ButtonLink to="/accessibility" variant="outline" className="mt-5">
+            Change accessibility settings
+          </ButtonLink>
+        </Card>
+      </section>
     </div>
   );
 }
