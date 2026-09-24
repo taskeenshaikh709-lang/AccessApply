@@ -29,14 +29,38 @@ export const Route = createFileRoute("/dashboard")({
 const tone = (status: Application["status"]) =>
   status === "Submitted" ? "blue" : status === "Draft" ? "muted" : "lavender";
 
+const FONT_SIZE_LABELS = { sm: "Small", md: "Medium", lg: "Large", xl: "Extra large" } as const;
+
 function Dashboard() {
+  const { settings, announce } = useA11y();
   const [apps, setApps] = useState<Application[]>([]);
   const [draftIds, setDraftIds] = useState<string[]>([]);
+  const [savedIds, setSavedIds] = useState<string[]>([]);
 
   useEffect(() => {
     setApps(getApplications());
     setDraftIds(Object.keys(getDrafts()));
+    setSavedIds(getSavedJobs());
   }, []);
+
+  const savedJobs = savedIds
+    .map((id) => jobs.find((j) => j.id === id))
+    .filter((j): j is NonNullable<typeof j> => Boolean(j));
+
+  const removeSaved = (jobId: string) => {
+    toggleSavedJob(jobId);
+    setSavedIds(getSavedJobs());
+    announce("Job removed from saved jobs.");
+  };
+
+  const prefRows: [string, string][] = [
+    ["Text size", FONT_SIZE_LABELS[settings.fontSize]],
+    ["High contrast", settings.contrast === "high" ? "Enabled" : "Off"],
+    ["Reduced motion", settings.motion === "reduced" ? "Enabled" : "Off"],
+    ["Increased text spacing", settings.spacing === "wide" ? "Enabled" : "Off"],
+    ["Dyslexia-friendly font", settings.font === "dyslexic" ? "Enabled" : "Off"],
+    ["Voice assistance", settings.voice ? "Enabled" : "Off"],
+  ];
 
   return (
     <div className="space-y-8">
