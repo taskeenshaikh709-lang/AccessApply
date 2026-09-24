@@ -99,3 +99,14 @@ export function nextApplicationId() {
   const count = getApplications().length + 124;
   return `AA-2026-${String(count).padStart(5, "0")}`;
 }
+
+export function getSavedJobs(): string[] {
+  return readJSON<string[]>(KEYS.savedJobs, []);
+}
+
+export function toggleSavedJob(jobId: string): boolean {
+  const saved = getSavedJobs();
+  const next = saved.includes(jobId) ? saved.filter((id) => id !== jobId) : [...saved, jobId];
+  writeJSON(KEYS.savedJobs, next);
+  return next.includes(jobId);
+}

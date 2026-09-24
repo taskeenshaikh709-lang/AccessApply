@@ -1,16 +1,14 @@
-# AccessApply roadmap
+# AccessApply roadmap — prototype → working demo conversion
 
-- [x] Design tokens + accessibility CSS layers
-- [x] Sample demo job data
-- [ ] Accessibility settings context + panel (localStorage)
-- [ ] Navbar, footer, AccessGuide assistant, voice assistance
-- [ ] Landing page
-- [ ] Job search + filters
-- [ ] Job details + Explain This Job + required vs preferred
-- [ ] Application assistant onboarding + 5-step form + errors + save draft
-- [ ] Review + user-confirmed submission
-- [ ] Success page
-- [ ] Candidate dashboard
-- [ ] Accessibility settings page, How It Works page
-- [ ] End-to-end demo flow: Home -> Data Analyst -> apply -> review -> confirm -> submitted -> dashboard
-- [ ] Head metadata per route, build check, keyboard/focus pass
+- [x] Audit existing routes/components vs brief (kept design, no rewrites of working pieces)
+- [x] 10 realistic demo jobs (added Software Engineer, Data Scientist, Backend Developer, QA Engineer, Business Analyst, Product Designer)
+- [x] Search + filters + clear filters + empty state verified
+- [x] Accessibility settings verified global (font size xl + high contrast confirmed in browser, persisted)
+- [x] Apply flow verified: onboarding, validation + Explain this error, save/restore draft, review with edit, confirm checkbox guard, submission
+- [x] Dashboard: applications with status, saved jobs section, accessibility preferences section
+- [x] Saved jobs feature (save/unsave on job page, dashboard list, remove)
+- [x] /about page + nav link
+- [x] Success page shows submission date
+- [x] Missing job → proper 404 page
+- [x] End-to-end demo run passed, no console errors (only expected 404 on missing-job test)
+- [x] Mobile check: no horizontal overflow on any route

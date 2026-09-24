@@ -219,6 +219,293 @@ export const jobs: Job[] = [
         "Yes, as long as you can show two interface projects of any kind in your portfolio.",
     },
   },
+  {
+    id: "software-engineer-nexapay",
+    title: "Software Engineer",
+    company: "NexaPay",
+    location: "Bengaluru / Hybrid",
+    workMode: "Hybrid",
+    type: "Full-time",
+    experience: "1–3 years",
+    experienceBand: "1-3",
+    salary: "₹9,00,000 – ₹14,00,000 per year",
+    salaryBand: "high",
+    skills: ["Java", "Spring Boot", "SQL", "Git"],
+    accessibility: ["Step-free office", "Assistive tech support", "Flexible hours", "Captioned meetings"],
+    summary: "Build reliable payment services used by thousands of small shops.",
+    description:
+      "NexaPay processes payments for small businesses across India. As a Software Engineer you will work on the services that move money safely and keep clear records of every transaction.",
+    responsibilities: [
+      "Build and maintain Java services for payments.",
+      "Write tests and documentation for your code.",
+      "Investigate and fix production issues with the team.",
+      "Take part in planning and code reviews.",
+    ],
+    requirements: [
+      "One to three years of backend or full-stack development.",
+      "Working knowledge of Java or a similar language.",
+      "Basic SQL and version control with Git.",
+      "Experience with payment systems preferred but not mandatory.",
+    ],
+    benefits: [
+      "Hybrid schedule with step-free office",
+      "Health and accident insurance",
+      "Assistive technology budget",
+      "Learning allowance every quarter",
+    ],
+    required: ["Java or similar language", "SQL", "Git"],
+    preferred: ["Spring Boot", "Payment systems", "Cloud deployment"],
+    plain: {
+      doWhat:
+        "You would write and look after the code that moves money between shops and banks, and fix it when something goes wrong.",
+      requiredSkills:
+        "You need one to three years of programming, Java or a similar language, basic SQL, and Git.",
+      preferredSkills:
+        "Knowing Spring Boot, payment systems or cloud deployment is preferred but may not be mandatory.",
+      experience: "One to three years. Internship experience counts towards this.",
+      beginnerFriendly:
+        "Partly. It suits someone with at least a year of real coding experience, including internships.",
+    },
+  },
+  {
+    id: "data-scientist-medmetrics",
+    title: "Data Scientist",
+    company: "MedMetrics",
+    location: "Remote",
+    workMode: "Remote",
+    type: "Full-time",
+    experience: "3+ years",
+    experienceBand: "3+",
+    salary: "₹15,00,000 – ₹22,00,000 per year",
+    salaryBand: "high",
+    skills: ["Python", "Machine learning", "Statistics", "SQL"],
+    accessibility: ["Fully remote", "Async-first team", "Screen reader friendly tools"],
+    summary: "Build models that help clinics predict appointment demand.",
+    description:
+      "MedMetrics builds forecasting tools for healthcare clinics. You will design models, test them carefully, and explain what they can and cannot do to non-technical teams.",
+    responsibilities: [
+      "Build and evaluate prediction models.",
+      "Write clean, reviewed Python code.",
+      "Document model limits in plain language.",
+      "Work with engineers to put models into the product.",
+    ],
+    requirements: [
+      "Three or more years working with data and statistics.",
+      "Strong Python and SQL.",
+      "Experience with machine learning methods.",
+      "Healthcare data experience is an advantage.",
+    ],
+    benefits: [
+      "Fully remote with async communication",
+      "Conference and training budget",
+      "Home workstation allowance",
+      "Four-week minimum leave policy",
+    ],
+    required: ["Python", "Statistics", "Machine learning", "SQL"],
+    preferred: ["Healthcare data", "Model deployment", "Deep learning"],
+    plain: {
+      doWhat:
+        "You would use past data to build programs that predict future demand for clinics, and explain clearly how reliable those predictions are.",
+      requiredSkills:
+        "You need strong Python and SQL, solid statistics, and real experience with machine learning.",
+      preferredSkills:
+        "Healthcare data experience or deep learning knowledge is preferred but may not be mandatory.",
+      experience: "Three or more years. This is a senior-level listing.",
+      beginnerFriendly:
+        "No. This role expects several years of experience and suits someone who has already worked as a data scientist or analyst.",
+    },
+  },
+  {
+    id: "backend-developer-fleetix",
+    title: "Backend Developer",
+    company: "Fleetix",
+    location: "Mumbai / On-site",
+    workMode: "On-site",
+    type: "Full-time",
+    experience: "1–3 years",
+    experienceBand: "1-3",
+    salary: "₹7,00,000 – ₹10,00,000 per year",
+    salaryBand: "mid",
+    skills: ["Node.js", "PostgreSQL", "REST APIs", "Docker"],
+    accessibility: ["Step-free office", "Quiet workspace available", "Flexible start times"],
+    summary: "Keep the systems behind a delivery-tracking product fast and reliable.",
+    description:
+      "Fleetix helps delivery companies track their vehicles in real time. You will maintain the APIs and databases that power live maps and driver apps.",
+    responsibilities: [
+      "Maintain Node.js services and PostgreSQL databases.",
+      "Improve API performance and reliability.",
+      "Write tests and monitor errors after releases.",
+      "Support the mobile team with new endpoints.",
+    ],
+    requirements: [
+      "One to three years of backend development.",
+      "Node.js and a relational database such as PostgreSQL.",
+      "Understanding of REST API design.",
+      "Docker experience preferred but not mandatory.",
+    ],
+    benefits: [
+      "Step-free office near a metro station",
+      "Quiet rooms for focused work",
+      "Health insurance",
+      "Monthly remote Fridays",
+    ],
+    required: ["Node.js", "PostgreSQL or similar", "REST APIs"],
+    preferred: ["Docker", "Caching", "Monitoring tools"],
+    plain: {
+      doWhat:
+        "You would look after the server code and databases that let delivery apps show vehicles moving on a map.",
+      requiredSkills:
+        "You need Node.js, a relational database like PostgreSQL, and an understanding of how APIs are designed.",
+      preferredSkills:
+        "Docker, caching and monitoring experience is preferred but may not be mandatory.",
+      experience: "One to three years of backend work.",
+      beginnerFriendly:
+        "Partly. It suits someone with about a year of real backend experience.",
+    },
+  },
+  {
+    id: "qa-engineer-brightbank",
+    title: "QA Engineer",
+    company: "BrightBank",
+    location: "Remote",
+    workMode: "Remote",
+    type: "Full-time",
+    experience: "0–2 years",
+    experienceBand: "0-2",
+    salary: "₹4,00,000 – ₹6,50,000 per year",
+    salaryBand: "low",
+    skills: ["Testing", "JavaScript", "Playwright", "Bug reporting"],
+    accessibility: ["Fully remote", "Screen reader friendly tools", "Flexible hours"],
+    summary: "Test a banking app carefully and write clear reports when things break.",
+    description:
+      "BrightBank is a small digital bank. As a QA Engineer you will test new features, reproduce bugs, and write reports that developers can act on quickly.",
+    responsibilities: [
+      "Test new features on web and mobile.",
+      "Write clear bug reports with steps to reproduce.",
+      "Maintain automated tests in Playwright.",
+      "Check accessibility basics on every release.",
+    ],
+    requirements: [
+      "Careful, methodical approach to testing software.",
+      "Basic JavaScript for reading and writing test scripts.",
+      "Clear written communication.",
+      "Experience with test automation tools preferred.",
+    ],
+    benefits: [
+      "Fully remote",
+      "Flexible working hours",
+      "Training budget for testing certifications",
+      "Screen-reader-friendly internal tools",
+    ],
+    required: ["Careful manual testing", "Basic JavaScript", "Clear bug reports"],
+    preferred: ["Playwright or Cypress", "Accessibility testing", "API testing"],
+    plain: {
+      doWhat:
+        "You would try out new features of a banking app, find what is broken, and describe each problem clearly so developers can fix it.",
+      requiredSkills:
+        "You need a careful testing mindset, basic JavaScript, and clear writing for bug reports.",
+      preferredSkills:
+        "Knowing Playwright, accessibility testing or API testing is preferred but may not be mandatory.",
+      experience: "Zero to two years. Coursework and personal testing projects count.",
+      beginnerFriendly:
+        "Yes. This is an entry-level listing and training budget is included.",
+    },
+  },
+  {
+    id: "business-analyst-greengrid",
+    title: "Business Analyst",
+    company: "GreenGrid",
+    location: "Bengaluru / Hybrid",
+    workMode: "Hybrid",
+    type: "Full-time",
+    experience: "1–3 years",
+    experienceBand: "1-3",
+    salary: "₹6,50,000 – ₹9,50,000 per year",
+    salaryBand: "mid",
+    skills: ["Excel", "SQL", "Documentation", "Stakeholder communication"],
+    accessibility: ["Captioned meetings", "Step-free office", "Hybrid schedule"],
+    summary: "Turn business questions into clear requirements for the product team.",
+    description:
+      "GreenGrid builds energy-saving software for offices. You will talk to clients, write clear requirement documents, and help the product team understand what to build.",
+    responsibilities: [
+      "Interview clients and write requirement documents.",
+      "Analyse data in Excel and SQL to support decisions.",
+      "Keep project documentation up to date.",
+      "Present findings to technical and non-technical teams.",
+    ],
+    requirements: [
+      "One to three years in an analytical or coordination role.",
+      "Strong Excel skills; basic SQL.",
+      "Excellent written and spoken communication.",
+      "Experience with requirement-gathering methods preferred.",
+    ],
+    benefits: [
+      "Hybrid schedule",
+      "Captioned and recorded meetings",
+      "Health insurance",
+      "Paid certification support",
+    ],
+    required: ["Excel", "Basic SQL", "Clear documentation"],
+    preferred: ["Requirement methods (user stories)", "Energy sector knowledge", "Presentation tools"],
+    plain: {
+      doWhat:
+        "You would talk to clients about what they need, write it down clearly, and help engineers understand exactly what to build.",
+      requiredSkills:
+        "You need strong Excel, basic SQL, and very clear writing and speaking.",
+      preferredSkills:
+        "Experience with user stories or the energy sector is preferred but may not be mandatory.",
+      experience: "One to three years in any analytical or coordination role.",
+      beginnerFriendly:
+        "Partly. A year of relevant work or internships is expected.",
+    },
+  },
+  {
+    id: "product-designer-carepath",
+    title: "Product Designer",
+    company: "CarePath",
+    location: "Remote",
+    workMode: "Remote",
+    type: "Part-time",
+    experience: "0–2 years",
+    experienceBand: "0-2",
+    salary: "₹3,00,000 – ₹5,00,000 per year (part-time)",
+    salaryBand: "low",
+    skills: ["Figma", "Prototyping", "Accessibility", "User research"],
+    accessibility: ["Fully remote", "Async-first team", "Flexible hours", "Screen reader friendly tools"],
+    summary: "Design calm, accessible screens for a patient-appointment app, part-time.",
+    description:
+      "CarePath helps patients book and manage clinic appointments. This is a part-time role where you will design new screens and improve the accessibility of existing ones.",
+    responsibilities: [
+      "Design new screens and prototypes in Figma.",
+      "Audit existing screens for accessibility issues.",
+      "Join monthly user calls and summarise feedback.",
+      "Maintain the design library.",
+    ],
+    requirements: [
+      "A portfolio with interface design work.",
+      "Working knowledge of Figma.",
+      "Interest in accessible design.",
+      "Experience with user research preferred.",
+    ],
+    benefits: [
+      "Part-time, roughly 20 hours per week",
+      "Fully remote and async",
+      "Design software budget",
+      "Flexible deadline planning",
+    ],
+    required: ["Figma", "Interface design portfolio"],
+    preferred: ["User research", "Accessibility audits", "Design systems"],
+    plain: {
+      doWhat:
+        "You would design screens for an app that helps patients book clinic visits, working about twenty hours a week from home.",
+      requiredSkills: "You need Figma and a portfolio showing interface design work.",
+      preferredSkills:
+        "User research or accessibility audit experience is preferred but may not be mandatory.",
+      experience: "Zero to two years. Student and freelance work counts.",
+      beginnerFriendly:
+        "Yes. This part-time role is open to newer designers with a portfolio.",
+    },
+  },
 ];
 
 export function getJob(id: string) {

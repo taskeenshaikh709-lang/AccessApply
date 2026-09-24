@@ -44,6 +44,7 @@ function SuccessPage() {
             ["Job", app?.jobTitle ?? "Demo role"],
             ["Company", app?.company ?? "Demo employer"],
             ["Status", app?.status ?? "Submitted"],
+            ["Submission date", app?.submittedAt ?? new Date().toISOString().slice(0, 10)],
           ].map(([k, v]) => (
             <div key={k} className="flex flex-wrap justify-between gap-2 border-b border-border pb-2 last:border-0">
               <dt className="font-semibold">{k}</dt>

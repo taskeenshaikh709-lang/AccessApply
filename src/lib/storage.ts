@@ -22,4 +22,5 @@ export const KEYS = {
   drafts: "accessapply.drafts",
   applications: "accessapply.applications",
   prefs: "accessapply.assistPrefs",
+  savedJobs: "accessapply.savedJobs",
 };
