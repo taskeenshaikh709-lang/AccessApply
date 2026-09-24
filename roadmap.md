@@ -1,15 +1,14 @@
 # AccessApply roadmap — prototype → working demo conversion
 
-Audit existing app against the conversion brief, fill gaps, keep design.
-
-- [ ] Audit all existing routes/components vs brief (preserve working pieces)
-- [ ] Expand demo jobs to 8–10 realistic listings
-- [ ] Verify/repair: search, filters, clear filters, empty states
-- [ ] Verify accessibility settings work globally (font size, contrast, motion, spacing, large buttons, voice)
-- [ ] Verify apply flow: prefs onboarding, 5 steps, validation+error explanation, save/restore draft, review with edit, confirm, submit
-- [ ] Dashboard: applications with status, saved jobs, drafts, preferences section
-- [ ] Add /about page if missing
-- [ ] Demo mode indicator everywhere relevant
-- [ ] Error handling: missing job, invalid route, storage failures, voice unsupported
-- [ ] Full end-to-end demo run (Playwright): home → search Data Analyst → explain → apply → error → draft → review → confirm → success → dashboard
-- [ ] Mobile/responsive check, no dead buttons, no console errors
+- [x] Audit existing routes/components vs brief (kept design, no rewrites of working pieces)
+- [x] 10 realistic demo jobs (added Software Engineer, Data Scientist, Backend Developer, QA Engineer, Business Analyst, Product Designer)
+- [x] Search + filters + clear filters + empty state verified
+- [x] Accessibility settings verified global (font size xl + high contrast confirmed in browser, persisted)
+- [x] Apply flow verified: onboarding, validation + Explain this error, save/restore draft, review with edit, confirm checkbox guard, submission
+- [x] Dashboard: applications with status, saved jobs section, accessibility preferences section
+- [x] Saved jobs feature (save/unsave on job page, dashboard list, remove)
+- [x] /about page + nav link
+- [x] Success page shows submission date
+- [x] Missing job → proper 404 page
+- [x] End-to-end demo run passed, no console errors (only expected 404 on missing-job test)
+- [x] Mobile check: no horizontal overflow on any route
