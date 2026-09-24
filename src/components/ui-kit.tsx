@@ -34,10 +34,11 @@ export function ButtonLink({
   to: string;
   params?: Record<string, string>;
 }) {
+  // Generic wrapper: callers supply concrete route paths/params, so narrow here.
   return (
     <Link
-      to={to}
-      params={params}
+      to={to as never}
+      params={params as never}
       className={cn(base, variants[variant], className)}
       {...props}
     />
