@@ -43,6 +43,30 @@ const journey = [
 
 function Home() {
   const { setPanelOpen } = useA11y();
+  const journeyRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    const list = journeyRef.current;
+    if (!list) return;
+    const items = Array.from(list.querySelectorAll<HTMLElement>(".reveal"));
+    if (typeof IntersectionObserver === "undefined") {
+      items.forEach((el) => el.classList.add("reveal-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    items.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="space-y-24">
