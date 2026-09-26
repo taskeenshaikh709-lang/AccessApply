@@ -1,16 +1,20 @@
 import { useEffect, useRef } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import type { ReactNode } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Compass,
   BookOpenText,
   Keyboard,
   ClipboardCheck,
   ShieldCheck,
+  ArrowRight,
   Type,
   Contrast,
   Mic,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { ButtonLink, Card, DemoBadge, Pill, SectionHeading } from "@/components/ui-kit";
+import { AccessibilityDemo } from "@/components/AccessibilityDemo";
 import { useA11y } from "@/lib/a11y";
 
 export const Route = createFileRoute("/")({
@@ -33,13 +37,89 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const journey = [
-  { n: "01", title: "Discover", text: "Find suitable jobs.", icon: Compass },
-  { n: "02", title: "Understand", text: "Get job requirements explained clearly.", icon: BookOpenText },
-  { n: "03", title: "Apply", text: "Complete the application with accessibility support.", icon: Keyboard },
-  { n: "04", title: "Review", text: "Check your answers before submitting.", icon: ClipboardCheck },
-  { n: "05", title: "Confirm", text: "You stay in control of the final submission.", icon: ShieldCheck },
+const EXAMPLE_JOB = "data-analyst-insightworks";
+
+type JourneyItem = {
+  n: string;
+  title: string;
+  text: string;
+  icon: LucideIcon;
+  to: string;
+  params?: Record<string, string> | undefined;
+  search?: Record<string, unknown> | undefined;
+  hint: string;
+};
+
+const journey: JourneyItem[] = [
+  {
+    n: "01",
+    title: "Discover",
+    text: "Find suitable jobs.",
+    icon: Compass,
+    to: "/jobs",
+    hint: "Opens the jobs list.",
+  },
+  {
+    n: "02",
+    title: "Understand",
+    text: "Get job requirements explained clearly.",
+    icon: BookOpenText,
+    to: "/jobs/$jobId",
+    params: { jobId: EXAMPLE_JOB },
+    hint: "Opens the Data Analyst job page with a plain-language explanation.",
+  },
+  {
+    n: "03",
+    title: "Apply",
+    text: "Complete the application with accessibility support.",
+    icon: Keyboard,
+    to: "/apply/$jobId",
+    params: { jobId: EXAMPLE_JOB },
+    hint: "Opens the accessible demo application at step 1.",
+  },
+  {
+    n: "04",
+    title: "Review",
+    text: "Check your answers before submitting.",
+    icon: ClipboardCheck,
+    to: "/apply/$jobId",
+    params: { jobId: EXAMPLE_JOB },
+    search: { step: 5 },
+    hint: "Opens the review step of the accessible demo application.",
+  },
+  {
+    n: "05",
+    title: "Confirm",
+    text: "You stay in control of the final submission.",
+    icon: ShieldCheck,
+    to: "/dashboard",
+    hint: "Opens My Applications, where you track what you submitted.",
+  },
 ];
+
+function JourneyCardLink({
+  to,
+  params,
+  search,
+  children,
+}: {
+  to: string;
+  params?: Record<string, string> | undefined;
+  search?: Record<string, unknown> | undefined;
+  children: ReactNode;
+}) {
+  // Generic wrapper: callers supply concrete route paths/params, so narrow here.
+  return (
+    <Link
+      to={to as never}
+      params={params as never}
+      search={search as never}
+      className="card-link group block h-full p-6"
+    >
+      {children}
+    </Link>
+  );
+}
 
 function Home() {
   const { setPanelOpen } = useA11y();
@@ -150,21 +230,28 @@ function Home() {
           id="journey-title"
           eyebrow="The journey"
           title="One Journey. Fewer Barriers."
-          description="Every stage of applying for a job, with support built into the step itself rather than bolted on afterwards."
+          description="Every stage of applying for a job, with support built into the step itself rather than bolted on afterwards. Select any step to open it."
         />
         <ol ref={journeyRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {journey.map(({ n, title, text, icon: Icon }, i) => (
+          {journey.map(({ n, title, text, icon: Icon, to, params, search, hint }, i) => (
             <li key={n} className="reveal" style={{ transitionDelay: `${i * 120}ms` }}>
-              <Card className="h-full">
+              <JourneyCardLink to={to} params={params} search={search}>
                 <Icon aria-hidden="true" className="size-6 text-primary" />
                 <p className="mt-4 text-sm font-semibold text-primary">{n}</p>
                 <h3 className="mt-1 text-lg font-semibold">{title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{text}</p>
-              </Card>
+                <ArrowRight
+                  aria-hidden="true"
+                  className="mt-4 size-4 text-primary transition-transform duration-200 group-hover:translate-x-1"
+                />
+                <span className="sr-only">{hint}</span>
+              </JourneyCardLink>
             </li>
           ))}
         </ol>
       </section>
+
+      <AccessibilityDemo />
 
       <section aria-labelledby="usp-title">
         <SectionHeading

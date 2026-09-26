@@ -1,6 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Briefcase, MapPin, Search, Wallet, GraduationCap } from "lucide-react";
+import {
+  Briefcase,
+  MapPin,
+  Search,
+  SearchX,
+  Wallet,
+  GraduationCap,
+} from "lucide-react";
 import { jobs, type Job } from "@/data/jobs";
 import { ButtonLink, Card, DemoBadge, Pill, SectionHeading, Button } from "@/components/ui-kit";
 import { useA11y } from "@/lib/a11y";
@@ -28,7 +35,7 @@ const allSkills = Array.from(new Set(jobs.flatMap((j) => j.skills))).sort();
 
 function JobCard({ job }: { job: Job }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card className="card-hover flex h-full flex-col">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h3 className="text-xl font-semibold">
@@ -140,6 +147,14 @@ function JobsPage() {
   const [skill, setSkill] = useState("Any skill");
   const [salary, setSalary] = useState("Any salary");
   const [accessOnly, setAccessOnly] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Demo job data ships with the app, so this short delay stands in for the
+  // fetch a real job source would do. It only runs once on first visit.
+  useEffect(() => {
+    const t = window.setTimeout(() => setLoading(false), 400);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const results = useMemo(
     () =>
@@ -187,6 +202,7 @@ function JobsPage() {
       <div>
         <DemoBadge />
         <SectionHeading
+          as="h1"
           title="Find Accessible Jobs"
           description="These are sample listings created for this prototype. They are not real vacancies and no application is sent to a real employer."
         />
@@ -271,27 +287,63 @@ function JobsPage() {
           <h2 id="results-title" className="text-lg font-semibold">
             Results
           </h2>
-          <p role="status" aria-live="polite" className="mt-1 text-sm text-muted-foreground">
-            Showing {results.length} of {jobs.length} demo jobs.
-          </p>
-          {results.length === 0 ? (
-            <Card className="mt-4">
-              <p className="font-medium">No demo jobs match these filters.</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Try clearing a filter or searching for a different skill.
+          {loading ? (
+            <>
+              <p role="status" className="mt-1 text-sm text-muted-foreground">
+                Loading demo jobs...
               </p>
-              <Button className="mt-4" variant="outline" onClick={resetFilters}>
-                Clear filters
-              </Button>
-            </Card>
+              <ul className="mt-4 grid gap-4 xl:grid-cols-2" aria-hidden="true">
+                {[0, 1, 2, 3].map((k) => (
+                  <li key={k}>
+                    <Card className="h-full">
+                      <div className="h-6 w-2/5 animate-pulse rounded bg-muted" />
+                      <div className="mt-2 h-4 w-1/4 animate-pulse rounded bg-muted" />
+                      <div className="mt-5 h-3 w-full animate-pulse rounded bg-muted" />
+                      <div className="mt-2 h-3 w-5/6 animate-pulse rounded bg-muted" />
+                      <div className="mt-5 grid grid-cols-2 gap-3">
+                        <div className="h-3 w-3/4 animate-pulse rounded bg-muted" />
+                        <div className="h-3 w-3/4 animate-pulse rounded bg-muted" />
+                      </div>
+                      <div className="mt-5 flex gap-2">
+                        <div className="h-7 w-16 animate-pulse rounded-full bg-muted" />
+                        <div className="h-7 w-20 animate-pulse rounded-full bg-muted" />
+                      </div>
+                      <div className="mt-6 h-11 w-32 animate-pulse rounded-xl bg-muted" />
+                    </Card>
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : (
-            <ul className="mt-4 grid gap-4 xl:grid-cols-2">
-              {results.map((job) => (
-                <li key={job.id}>
-                  <JobCard job={job} />
-                </li>
-              ))}
-            </ul>
+            <>
+              <p role="status" aria-live="polite" className="mt-1 text-sm text-muted-foreground">
+                Showing {results.length} of {jobs.length} demo jobs.
+              </p>
+              {results.length === 0 ? (
+                <Card className="mt-4">
+                  <div className="flex items-start gap-3">
+                    <SearchX aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-primary" />
+                    <div>
+                      <p className="font-medium">No jobs match your filters — try adjusting them.</p>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Clear a filter, widen the salary band, or search for a different skill.
+                      </p>
+                      <Button className="mt-4" variant="outline" onClick={resetFilters}>
+                        Clear filters
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ) : (
+                <ul className="mt-4 grid gap-4 xl:grid-cols-2">
+                  {results.map((job) => (
+                    <li key={job.id}>
+                      <JobCard job={job} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
           )}
         </section>
       </div>
