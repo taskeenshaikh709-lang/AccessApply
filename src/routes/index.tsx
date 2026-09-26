@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Compass,
@@ -42,6 +43,30 @@ const journey = [
 
 function Home() {
   const { setPanelOpen } = useA11y();
+  const journeyRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    const list = journeyRef.current;
+    if (!list) return;
+    const items = Array.from(list.querySelectorAll<HTMLElement>(".reveal"));
+    if (typeof IntersectionObserver === "undefined") {
+      items.forEach((el) => el.classList.add("reveal-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.2 },
+    );
+    items.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="space-y-24">
@@ -127,9 +152,9 @@ function Home() {
           title="One Journey. Fewer Barriers."
           description="Every stage of applying for a job, with support built into the step itself rather than bolted on afterwards."
         />
-        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {journey.map(({ n, title, text, icon: Icon }) => (
-            <li key={n}>
+        <ol ref={journeyRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {journey.map(({ n, title, text, icon: Icon }, i) => (
+            <li key={n} className="reveal" style={{ transitionDelay: `${i * 120}ms` }}>
               <Card className="h-full">
                 <Icon aria-hidden="true" className="size-6 text-primary" />
                 <p className="mt-4 text-sm font-semibold text-primary">{n}</p>
