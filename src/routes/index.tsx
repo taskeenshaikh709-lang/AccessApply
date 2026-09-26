@@ -152,9 +152,9 @@ function Home() {
           title="One Journey. Fewer Barriers."
           description="Every stage of applying for a job, with support built into the step itself rather than bolted on afterwards."
         />
-        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {journey.map(({ n, title, text, icon: Icon }) => (
-            <li key={n}>
+        <ol ref={journeyRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {journey.map(({ n, title, text, icon: Icon }, i) => (
+            <li key={n} className="reveal" style={{ transitionDelay: `${i * 120}ms` }}>
               <Card className="h-full">
                 <Icon aria-hidden="true" className="size-6 text-primary" />
                 <p className="mt-4 text-sm font-semibold text-primary">{n}</p>
