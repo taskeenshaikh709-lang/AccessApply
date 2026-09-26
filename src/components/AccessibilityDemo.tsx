@@ -38,7 +38,9 @@ export function AccessibilityDemo() {
 
   const applyToSite = () => {
     if (big) {
-      const next = SIZES[Math.min(SIZES.indexOf(settings.fontSize) + 1, SIZES.length - 1)];
+      const next =
+        SIZES[Math.min(SIZES.indexOf(settings.fontSize) + 1, SIZES.length - 1)] ??
+        settings.fontSize;
       if (next !== settings.fontSize) update("fontSize", next);
     }
     if (high) update("contrast", "high");
