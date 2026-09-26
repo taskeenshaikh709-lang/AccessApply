@@ -67,7 +67,6 @@ function Dashboard() {
       <div>
         <DemoBadge />
         <SectionHeading
-          as="h1"
           title="My Applications"
           description="Everything here is sample data stored in this browser. Nothing has been sent to a real employer."
         />
@@ -89,7 +88,7 @@ function Dashboard() {
                 <Card className="h-full">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <h3 className="text-xl font-semibold">{a.jobTitle}</h3>
+                      <h2 className="text-xl font-semibold">{a.jobTitle}</h2>
                       <p className="text-muted-foreground">{a.company}</p>
                     </div>
                     <Pill tone={tone(a.status)}>{a.status}</Pill>

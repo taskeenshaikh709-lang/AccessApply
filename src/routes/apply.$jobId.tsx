@@ -328,21 +328,6 @@ function ApplyPage() {
     );
   }
 
-  const hasAnswers = Boolean(
-    data.fullName.trim() ||
-      data.email.trim() ||
-      data.phone.trim() ||
-      data.location.trim() ||
-      data.education.trim() ||
-      data.experience.trim() ||
-      data.projects.trim() ||
-      data.otherSkills.trim() ||
-      data.skills.length ||
-      data.whyRole.trim() ||
-      data.pythonExperience.trim() ||
-      data.availability.trim(),
-  );
-
   const errorList = Object.entries(errors);
 
   return (
@@ -538,18 +523,6 @@ function ApplyPage() {
               <h2 className="text-xl font-semibold">Review Your Application</h2>
               <p className="mt-1 text-sm">Please review your answers before submitting.</p>
             </div>
-            {!hasAnswers ? (
-              <div role="status" className="rounded-xl border border-border bg-muted p-4">
-                <p className="font-semibold">Nothing to review yet</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  No answers have been entered for this application yet. Go to step 1 to fill it in,
-                  then return here to check everything before you submit.
-                </p>
-                <Button className="mt-3" onClick={() => setStep(0)}>
-                  Go to step 1
-                </Button>
-              </div>
-            ) : null}
             {[
               { title: "Personal Information", to: 0, rows: [["Full name", data.fullName], ["Email", data.email], ["Phone", data.phone], ["Location", data.location]] },
               { title: "Experience", to: 1, rows: [["Education", data.education], ["Work experience", data.experience], ["Projects", data.projects || "Not provided"]] },

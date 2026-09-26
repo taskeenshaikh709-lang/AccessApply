@@ -104,15 +104,11 @@ export function useA11y() {
 }
 
 /** Speak text aloud when the browser supports speech synthesis. */
-export function speak(text: string, onEnd?: () => void): boolean {
+export function speak(text: string): boolean {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return false;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.rate = 0.95;
-  if (onEnd) {
-    utterance.onend = onEnd;
-    utterance.onerror = onEnd;
-  }
   window.speechSynthesis.speak(utterance);
   return true;
 }

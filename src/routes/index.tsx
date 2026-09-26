@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ButtonLink, Card, DemoBadge, Pill, SectionHeading } from "@/components/ui-kit";
-import { AccessibilityDemo } from "@/components/AccessibilityDemo";
 import { useA11y } from "@/lib/a11y";
 
 export const Route = createFileRoute("/")({
@@ -250,8 +249,6 @@ function Home() {
           ))}
         </ol>
       </section>
-
-      <AccessibilityDemo />
 
       <section aria-labelledby="usp-title">
         <SectionHeading
