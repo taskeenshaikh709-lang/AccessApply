@@ -45,12 +45,19 @@ function Home() {
 
   return (
     <div className="space-y-24">
-      <section aria-labelledby="hero-title" className="grid items-center gap-10 lg:grid-cols-2">
+      <section
+        aria-labelledby="hero-title"
+        className="hero-surface grid items-center gap-10 rounded-3xl border border-border/70 px-6 py-10 sm:px-10 lg:grid-cols-2"
+      >
         <div>
           <DemoBadge />
           <h1 id="hero-title" className="mt-5 text-4xl font-semibold leading-tight sm:text-5xl">
             Accessible Job Applications for Everyone.
           </h1>
+          <p className="mt-4 inline-flex max-w-md items-center gap-2 rounded-full border border-success/25 bg-success/10 px-3 py-1.5 text-sm font-semibold text-success">
+            <ShieldCheck aria-hidden="true" className="size-4 shrink-0" />
+            No medical or disability information ever required
+          </p>
           <p className="mt-5 text-lg text-muted-foreground">
             Find opportunities, understand requirements, and complete applications with
             accessibility support built into every step.
