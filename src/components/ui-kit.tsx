@@ -65,20 +65,22 @@ export function SectionHeading({
   title,
   description,
   id,
+  as: Tag = "h2",
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   id?: string;
+  as?: "h1" | "h2";
 }) {
   return (
     <div className="max-w-2xl">
       {eyebrow ? (
         <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">{eyebrow}</p>
       ) : null}
-      <h2 id={id} className="text-3xl font-semibold sm:text-4xl">
+      <Tag id={id} className="text-3xl font-semibold sm:text-4xl">
         {title}
-      </h2>
+      </Tag>
       {description ? <p className="mt-3 text-lg text-muted-foreground">{description}</p> : null}
     </div>
   );

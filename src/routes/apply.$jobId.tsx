@@ -15,7 +15,13 @@ import {
   type FormData,
 } from "@/lib/applications";
 
+type ApplySearch = { step?: number };
+
 export const Route = createFileRoute("/apply/$jobId")({
+  validateSearch: (search: Record<string, unknown>): ApplySearch => {
+    const n = Number(search["step"]);
+    return Number.isInteger(n) && n >= 1 && n <= 5 ? { step: n } : {};
+  },
   loader: ({ params }) => {
     const job = getJob(params.jobId);
     if (!job) throw notFound();
@@ -110,12 +116,13 @@ const inputClass = (invalid: boolean) =>
 
 function ApplyPage() {
   const { job } = Route.useLoaderData();
+  const { step: stepParam } = Route.useSearch();
   const navigate = useNavigate();
   const { announce } = useA11y();
 
-  const [onboarded, setOnboarded] = useState(false);
+  const [onboarded, setOnboarded] = useState(stepParam !== undefined);
   const [assist, setAssist] = useState<string[]>([]);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(stepParam ? stepParam - 1 : 0);
   const [data, setData] = useState<FormData>(emptyForm);
   const [errors, setErrors] = useState<Errors>({});
   const [saved, setSaved] = useState("");
@@ -131,9 +138,9 @@ function ApplyPage() {
     const draft = getDrafts()[job.id];
     if (draft) {
       setData(draft.data);
-      setStep(draft.step);
+      if (stepParam === undefined) setStep(draft.step);
     }
-  }, [job.id]);
+  }, [job.id, stepParam]);
 
   const set = <K extends keyof FormData>(key: K, value: FormData[K]) =>
     setData((prev) => ({ ...prev, [key]: value }));
@@ -320,6 +327,21 @@ function ApplyPage() {
       </div>
     );
   }
+
+  const hasAnswers = Boolean(
+    data.fullName.trim() ||
+      data.email.trim() ||
+      data.phone.trim() ||
+      data.location.trim() ||
+      data.education.trim() ||
+      data.experience.trim() ||
+      data.projects.trim() ||
+      data.otherSkills.trim() ||
+      data.skills.length ||
+      data.whyRole.trim() ||
+      data.pythonExperience.trim() ||
+      data.availability.trim(),
+  );
 
   const errorList = Object.entries(errors);
 
@@ -516,6 +538,18 @@ function ApplyPage() {
               <h2 className="text-xl font-semibold">Review Your Application</h2>
               <p className="mt-1 text-sm">Please review your answers before submitting.</p>
             </div>
+            {!hasAnswers ? (
+              <div role="status" className="rounded-xl border border-border bg-muted p-4">
+                <p className="font-semibold">Nothing to review yet</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  No answers have been entered for this application yet. Go to step 1 to fill it in,
+                  then return here to check everything before you submit.
+                </p>
+                <Button className="mt-3" onClick={() => setStep(0)}>
+                  Go to step 1
+                </Button>
+              </div>
+            ) : null}
             {[
               { title: "Personal Information", to: 0, rows: [["Full name", data.fullName], ["Email", data.email], ["Phone", data.phone], ["Location", data.location]] },
               { title: "Experience", to: 1, rows: [["Education", data.education], ["Work experience", data.experience], ["Projects", data.projects || "Not provided"]] },
