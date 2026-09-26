@@ -172,6 +172,12 @@ html[data-focus="strong"] :focus-visible {
   box-shadow: 0 1px 2px oklch(0.3 0.05 297 / 6%), 0 10px 30px -18px oklch(0.3 0.05 297 / 30%);
 }
 
+@utility hero-surface {
+  background-image:
+    radial-gradient(46rem 22rem at 88% -12%, color-mix(in oklab, var(--softblue) 85%, white) 0%, transparent 70%),
+    linear-gradient(165deg, var(--softblue) 0%, color-mix(in oklab, var(--softblue) 32%, white) 46%, var(--card) 100%);
+}
+
 @utility skip-link {
   position: absolute;
   left: -9999px;
