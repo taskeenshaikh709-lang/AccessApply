@@ -1,14 +1,17 @@
-# AccessApply roadmap — prototype → working demo conversion
+# AccessApply — quality pass (polished, production-ready)
 
-- [x] Audit existing routes/components vs brief (kept design, no rewrites of working pieces)
-- [x] 10 realistic demo jobs (added Software Engineer, Data Scientist, Backend Developer, QA Engineer, Business Analyst, Product Designer)
-- [x] Search + filters + clear filters + empty state verified
-- [x] Accessibility settings verified global (font size xl + high contrast confirmed in browser, persisted)
-- [x] Apply flow verified: onboarding, validation + Explain this error, save/restore draft, review with edit, confirm checkbox guard, submission
-- [x] Dashboard: applications with status, saved jobs section, accessibility preferences section
-- [x] Saved jobs feature (save/unsave on job page, dashboard list, remove)
-- [x] /about page + nav link
-- [x] Success page shows submission date
-- [x] Missing job → proper 404 page
-- [x] End-to-end demo run passed, no console errors (only expected 404 on missing-job test)
-- [x] Mobile check: no horizontal overflow on any route
+All items below are complete and verified in the browser.
+
+## Done
+- [x] Journey cards clickable (Discover→/jobs, Understand→job page, Apply→apply form, Review→?step=5 review step, Confirm→/dashboard), hover lift + shadow, keyboard/screen-reader accessible links, arrow affordance
+- [x] Homepage hero fade-in on load (respects reduced motion)
+- [x] Job cards: hover lift + skeleton loading; friendly empty state with icon + working Clear filters
+- [x] Buttons/CTAs consistent, ≥44px tap targets, visible focus states
+- [x] Full apply flow e2e: Next/Back preserves data, review shows entered data, confirm-guard, submit, success page, dashboard status
+- [x] All filters + Clear filters verified (location, type, mode, experience, skills, salary, access-only)
+- [x] Homepage interactive accessibility demo (larger text, high contrast, voice reading) live on sample text
+- [x] Settings persist across pages (verified xl/high carried from /jobs to /)
+- [x] Keyboard tab order + strong 4px focus outline; reduced motion disables animations
+- [x] Mobile 390px pass: no horizontal overflow on home/jobs/apply; AccessGuide button now compact circle on mobile
+- [x] Route sweep: all pages 200; invalid job/apply ids return proper 404
+- [x] Typecheck zero errors; build OK; no unexpected console errors

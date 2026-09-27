@@ -117,13 +117,16 @@ export function AccessGuide() {
 
   if (!open) {
     return (
-      <Button
-        className="fixed bottom-4 right-4 z-40 shadow-lg"
+      <button
+        type="button"
         onClick={() => setOpen(true)}
         aria-expanded={false}
+        aria-label="Open AccessGuide"
+        className="fixed bottom-4 right-4 z-40 inline-flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-200 hover:bg-primary/90 hover:scale-105 sm:h-auto sm:w-auto sm:gap-2 sm:rounded-xl sm:px-5 sm:py-2.5 sm:font-medium sm:hover:scale-none"
       >
-        <MessageCircleQuestion aria-hidden="true" className="size-5" /> Ask AccessGuide
-      </Button>
+        <MessageCircleQuestion aria-hidden="true" className="size-5" />
+        <span className="hidden sm:inline">Ask AccessGuide</span>
+      </button>
     );
   }
 

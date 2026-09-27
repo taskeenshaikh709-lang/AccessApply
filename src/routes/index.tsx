@@ -15,6 +15,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { ButtonLink, Card, DemoBadge, Pill, SectionHeading } from "@/components/ui-kit";
 import { useA11y } from "@/lib/a11y";
+import { AccessibilityDemo } from "@/components/AccessibilityDemo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -154,30 +155,49 @@ function Home() {
         className="hero-surface grid items-center gap-10 rounded-3xl border border-border/70 px-6 py-10 sm:px-10 lg:grid-cols-2"
       >
         <div>
-          <DemoBadge />
-          <h1 id="hero-title" className="mt-5 text-4xl font-semibold leading-tight sm:text-5xl">
+          <span className="hero-in block">
+            <DemoBadge />
+          </span>
+          <h1
+            id="hero-title"
+            className="hero-in mt-5 text-4xl font-semibold leading-tight sm:text-5xl"
+            style={{ animationDelay: "90ms" }}
+          >
             Accessible Job Applications for Everyone.
           </h1>
-          <p className="mt-4 inline-flex max-w-md items-center gap-2 rounded-full border border-success/25 bg-success/10 px-3 py-1.5 text-sm font-semibold text-success">
+          <p
+            className="hero-in mt-4 inline-flex max-w-md items-center gap-2 rounded-full border border-success/25 bg-success/10 px-3 py-1.5 text-sm font-semibold text-success"
+            style={{ animationDelay: "170ms" }}
+          >
             <ShieldCheck aria-hidden="true" className="size-4 shrink-0" />
             No medical or disability information ever required
           </p>
-          <p className="mt-5 text-lg text-muted-foreground">
+          <p
+            className="hero-in mt-5 text-lg text-muted-foreground"
+            style={{ animationDelay: "240ms" }}
+          >
             Find opportunities, understand requirements, and complete applications with
             accessibility support built into every step.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="hero-in mt-8 flex flex-wrap gap-3" style={{ animationDelay: "300ms" }}>
             <ButtonLink to="/jobs">Find Accessible Jobs</ButtonLink>
             <ButtonLink to="/how-it-works" variant="secondary">
               How It Works
             </ButtonLink>
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">
+          <p
+            className="hero-in mt-6 text-sm text-muted-foreground"
+            style={{ animationDelay: "340ms" }}
+          >
             Find. Understand. Apply. Review. Confirm.
           </p>
         </div>
 
-        <Card aria-label="Preview of the accessible application interface" className="space-y-5">
+        <Card
+          aria-label="Preview of the accessible application interface"
+          className="hero-in space-y-5"
+          style={{ animationDelay: "360ms" }}
+        >
           <div className="flex items-center justify-between gap-4">
             <p className="font-display text-lg font-semibold">Data Analyst — InsightWorks</p>
             <Pill tone="blue">Step 3 of 5</Pill>
@@ -223,6 +243,8 @@ function Home() {
           </button>
         </Card>
       </section>
+
+      <AccessibilityDemo />
 
       <section aria-labelledby="journey-title">
         <SectionHeading
