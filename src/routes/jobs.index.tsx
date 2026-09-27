@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Briefcase, MapPin, Search, Wallet, GraduationCap } from "lucide-react";
+import { Briefcase, MapPin, Search, SearchX, Wallet, GraduationCap } from "lucide-react";
 import { jobs, type Job } from "@/data/jobs";
 import { ButtonLink, Card, DemoBadge, Pill, SectionHeading, Button } from "@/components/ui-kit";
 import { useA11y } from "@/lib/a11y";
@@ -28,7 +28,7 @@ const allSkills = Array.from(new Set(jobs.flatMap((j) => j.skills))).sort();
 
 function JobCard({ job }: { job: Job }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card className="lift flex h-full flex-col">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h3 className="text-xl font-semibold">
@@ -97,6 +97,33 @@ function JobCard({ job }: { job: Job }) {
   );
 }
 
+/** Static skeleton placeholder shown while the job cards load in. */
+function JobCardSkeleton() {
+  return (
+    <div aria-hidden="true" className="card-surface space-y-4 p-6">
+      <div className="flex items-start justify-between gap-3">
+        <div className="w-2/3 space-y-2">
+          <div className="h-6 w-3/4 rounded-full bg-muted" />
+          <div className="h-4 w-1/2 rounded-full bg-muted" />
+        </div>
+        <div className="h-7 w-20 rounded-full bg-muted" />
+      </div>
+      <div className="h-4 w-full rounded-full bg-muted" />
+      <div className="h-4 w-5/6 rounded-full bg-muted" />
+      <div className="grid grid-cols-2 gap-2">
+        <div className="h-4 w-24 rounded-full bg-muted" />
+        <div className="h-4 w-20 rounded-full bg-muted" />
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <div className="h-7 w-16 rounded-full bg-muted" />
+        <div className="h-7 w-20 rounded-full bg-muted" />
+        <div className="h-7 w-16 rounded-full bg-muted" />
+      </div>
+      <div className="h-11 w-36 rounded-xl bg-muted" />
+    </div>
+  );
+}
+
 function Select({
   label,
   value,
@@ -140,6 +167,12 @@ function JobsPage() {
   const [skill, setSkill] = useState("Any skill");
   const [salary, setSalary] = useState("Any salary");
   const [accessOnly, setAccessOnly] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => setLoading(false), 600);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const results = useMemo(
     () =>
@@ -272,15 +305,32 @@ function JobsPage() {
             Results
           </h2>
           <p role="status" aria-live="polite" className="mt-1 text-sm text-muted-foreground">
-            Showing {results.length} of {jobs.length} demo jobs.
+            {loading
+              ? "Loading jobs…"
+              : `Showing ${results.length} of ${jobs.length} demo jobs.`}
           </p>
-          {results.length === 0 ? (
-            <Card className="mt-4">
-              <p className="font-medium">No demo jobs match these filters.</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Try clearing a filter or searching for a different skill.
-              </p>
-              <Button className="mt-4" variant="outline" onClick={resetFilters}>
+          {loading ? (
+            <ul className="mt-4 grid gap-4 xl:grid-cols-2" aria-hidden="true">
+              {Array.from({ length: 4 }, (_, i) => (
+                <li key={i}>
+                  <JobCardSkeleton />
+                </li>
+              ))}
+            </ul>
+          ) : results.length === 0 ? (
+            <Card className="mt-4 flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center">
+              <SearchX aria-hidden="true" className="size-10 shrink-0 text-primary" />
+              <div className="min-w-0">
+                <p className="font-semibold">No jobs match your filters — try adjusting them.</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Try clearing a filter or searching for a different skill.
+                </p>
+              </div>
+              <Button
+                className="mt-2 shrink-0 sm:mt-0 sm:ml-auto"
+                variant="outline"
+                onClick={resetFilters}
+              >
                 Clear filters
               </Button>
             </Card>
